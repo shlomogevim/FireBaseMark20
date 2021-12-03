@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "484919819121",
+    "project_id": "fir-mark-course",
+    "storage_bucket": "fir-mark-course.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484919819121:android:582f762992b8c728cf54d0",
+        "android_client_info": {
+          "package_name": "com.sg.firbasemark10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484919819121-v5nn804nrcon4mgesvfum184f0q1mdu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVVEFC_Y4dCWSFPSD5ZLkh5YjX6eQddbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484919819121-v5nn804nrcon4mgesvfum184f0q1mdu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:484919819121:android:71f9e4c9e33592e0cf54d0",
+        "android_client_info": {
+          "package_name": "com.sg.firebasemark20"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "484919819121-v5nn804nrcon4mgesvfum184f0q1mdu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVVEFC_Y4dCWSFPSD5ZLkh5YjX6eQddbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "484919819121-v5nn804nrcon4mgesvfum184f0q1mdu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
