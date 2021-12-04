@@ -37,10 +37,11 @@ class ThoughtsAdapter(val thoughts: ArrayList<Thought>) :
             username?.text = thougt.userName
             thoughtTxt?.text = thougt.thoughtTxt
             numLikes?.text = thougt.numLikes.toString()
+            timestamp?.text =thougt.timestamp?.toDate().toString()
 
-            val dateFormator = SimpleDateFormat("MMM d, h:mm a", Locale.getDefault())
+         /*   val dateFormator = SimpleDateFormat("MMM d, h:mm a", Locale.getDefault())
             val dateString = dateFormator.format(thougt.timestamp)
-            timestamp?.text = dateString
+            timestamp?.text = dateString*/
 
         }
 
