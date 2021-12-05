@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -37,12 +38,11 @@ class ThoughtsAdapter(val thoughts: ArrayList<Thought>) :
             username?.text = thougt.userName
             thoughtTxt?.text = thougt.thoughtTxt
             numLikes?.text = thougt.numLikes.toString()
-            timestamp?.text =thougt.timestamp?.toDate().toString()
-
-         /*   val dateFormator = SimpleDateFormat("MMM d, h:mm a", Locale.getDefault())
-            val dateString = dateFormator.format(thougt.timestamp)
-            timestamp?.text = dateString*/
-
+            timestamp?.text = thougt.timestamp?.toDate().toString()
+            likesImage.setOnClickListener {
+               FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thougt.documentId)
+                   .update(NUM_LIKES,thougt.numLikes+1)
+            }
         }
 
     }
