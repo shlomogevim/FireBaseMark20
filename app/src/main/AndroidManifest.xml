@@ -9,13 +9,19 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.FireBaseMark20">
         <activity
+            android:name=".CreateUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".AddThougtActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FireBaseMark20.NoActionBar">
+            android:theme="@style/Theme.FireBaseMark20">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
