@@ -1,4 +1,4 @@
-package com.sg.firebasemark20
+package com.sg.firebasemark20.model
 
 
 import com.google.firebase.Timestamp

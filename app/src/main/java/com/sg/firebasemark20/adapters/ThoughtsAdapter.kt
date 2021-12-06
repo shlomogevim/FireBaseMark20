@@ -1,4 +1,4 @@
-package com.sg.firebasemark20
+package com.sg.firebasemark20.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,18 +7,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
-import java.text.SimpleDateFormat
-import java.util.*
+import com.sg.firebasemark20.NUM_LIKES
+import com.sg.firebasemark20.R
+import com.sg.firebasemark20.THOUGHT_REF
+import com.sg.firebasemark20.model.Thought
 import kotlin.collections.ArrayList
 
-class ThoughtsAdapter(val thoughts: ArrayList<Thought>) :
+class ThoughtsAdapter(val thoughts: ArrayList<Thought>,val itemClick:((Thought)-> Unit)) :
     RecyclerView.Adapter<ThoughtsAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
             LayoutInflater.from(parent?.context).inflate(R.layout.thought_list_view, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view,itemClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -27,21 +29,24 @@ class ThoughtsAdapter(val thoughts: ArrayList<Thought>) :
 
     override fun getItemCount() = thoughts.size
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View,val itemClick: (Thought) -> Unit) : RecyclerView.ViewHolder(itemView) {
+
         val username = itemView?.findViewById<TextView>(R.id.listViewUsername)
         val timestamp = itemView?.findViewById<TextView>(R.id.listViewTimestamp)
         val thoughtTxt = itemView?.findViewById<TextView>(R.id.listViewToughtTxt)
         val numLikes = itemView?.findViewById<TextView>(R.id.listViewNumLikes)
         val likesImage = itemView?.findViewById<ImageView>(R.id.listViewLikesImage)
 
-        fun bindThought(thougt: Thought) {
-            username?.text = thougt.userName
-            thoughtTxt?.text = thougt.thoughtTxt
-            numLikes?.text = thougt.numLikes.toString()
-            timestamp?.text = thougt.timestamp?.toDate().toString()
+        fun bindThought(thought: Thought) {
+            username?.text = thought.userName
+            thoughtTxt?.text = thought.thoughtTxt
+            numLikes?.text = thought.numLikes.toString()
+            timestamp?.text = thought.timestamp?.toDate().toString()
+            itemView.setOnClickListener {itemClick(thought) }
+
             likesImage.setOnClickListener {
-               FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thougt.documentId)
-                   .update(NUM_LIKES,thougt.numLikes+1)
+               FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thought.documentId)
+                   .update(NUM_LIKES,thought.numLikes+1)
             }
         }
 

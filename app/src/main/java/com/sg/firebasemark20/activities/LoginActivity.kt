@@ -1,4 +1,4 @@
-package com.sg.firebasemark20
+package com.sg.firebasemark20.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
+import com.sg.firebasemark20.R
+import com.sg.firebasemark20.TAG
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
@@ -39,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
     fun loginCreateClicked(view: View) {
-        val intent= Intent(this,CreateUserActivity::class.java)
+        val intent= Intent(this, CreateUserActivity::class.java)
         startActivity(intent)
 
     }

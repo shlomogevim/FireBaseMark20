@@ -1,4 +1,4 @@
-package com.sg.firebasemark20
+package com.sg.firebasemark20.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -13,6 +13,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
+import com.sg.firebasemark20.*
+import com.sg.firebasemark20.adapters.ThoughtsAdapter
+import com.sg.firebasemark20.model.Thought
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +39,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        thoughtsAdapter = ThoughtsAdapter((thoughts))
+        thoughtsAdapter = ThoughtsAdapter(thoughts){thought->
+            val commentIntent=Intent(this,CommentsActivity::class.java)
+            commentIntent.putExtra(COMMENTS_KEY,thought.documentId)
+            startActivity(commentIntent)
+
+        }
         thoughtListView.adapter = thoughtsAdapter
         val layoutManager = LinearLayoutManager(this)
         thoughtListView.layoutManager = layoutManager
@@ -95,7 +103,7 @@ class MainActivity : AppCompatActivity() {
 
         if (item.itemId== R.id.action_login){
             if (auth.currentUser==null){
-                val intent=Intent(this,LoginActivity::class.java)
+                val intent=Intent(this, LoginActivity::class.java)
                 startActivity(intent)
             }else{
                 auth.signOut()

@@ -1,4 +1,4 @@
-package com.sg.firebasemark20
+package com.sg.firebasemark20.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.sg.firebasemark20.*
 import kotlinx.android.synthetic.main.activity_add_thougt.*
 
 class AddThougtActivity : AppCompatActivity() {

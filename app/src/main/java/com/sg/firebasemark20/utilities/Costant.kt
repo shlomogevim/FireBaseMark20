@@ -15,6 +15,7 @@ const val TAG="aaa"
 const val THOUGHT_REF="thoughts"
 const val USERS_REF="users"
 const val COMMENTS_REF="comments"
+const val COMMENTS_KEY="comments_key"
 
 //category
 
