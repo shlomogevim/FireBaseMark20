@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
             val commentIntent=Intent(this,CommentsActivity::class.java)
             commentIntent.putExtra(COMMENTS_KEY,thought.documentId)
             startActivity(commentIntent)
-
         }
+
         thoughtListView.adapter = thoughtsAdapter
         val layoutManager = LinearLayoutManager(this)
         thoughtListView.layoutManager = layoutManager

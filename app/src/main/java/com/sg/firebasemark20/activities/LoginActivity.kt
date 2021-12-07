@@ -24,11 +24,8 @@ class LoginActivity : AppCompatActivity() {
         var email=loginEmailTxt.text.toString()
         var password=loginPasswordTxt.text.toString()
 
-
-
-        email="aa@gmail.com"
-        password="123456"
-
+      /*  email="aa@gmail.com"
+        password="123456"*/
 
         auth.signInWithEmailAndPassword(email,password)
             .addOnSuccessListener {
