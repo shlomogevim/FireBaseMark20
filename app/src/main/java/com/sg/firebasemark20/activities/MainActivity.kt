@@ -170,13 +170,15 @@ class MainActivity : AppCompatActivity() {
                 }
                 val timestamp = document.getTimestamp(TIMESTAMP)
                 val documentId = document.id
+                val userId=data[USER_ID] as String
                 val newThought = Thought(
                     name,
                     timestamp,
                     thoughtTxt,
                     numLikes.toInt(),
                     numComments.toInt(),
-                    documentId
+                    documentId,
+                    userId
                 )
                 thoughts.add(newThought)
             }

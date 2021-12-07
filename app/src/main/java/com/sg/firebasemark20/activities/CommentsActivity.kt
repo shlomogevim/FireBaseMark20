@@ -35,7 +35,7 @@ class CommentsActivity : AppCompatActivity() {
 
         FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thoughtDocumentID)
             .collection(COMMENTS_REF)
-            .orderBy(TIMESTAMP,Query.Direction.DESCENDING)
+            .orderBy(TIMESTAMP, Query.Direction.DESCENDING)
             .addSnapshotListener { snapshot, error ->
                 if (error != null) {
                     Log.d(TAG, "cannot create comment because : ${error.localizedMessage}")
@@ -47,8 +47,10 @@ class CommentsActivity : AppCompatActivity() {
                         val name = data!![USERNAME] as String
                         val timestame = doco.getTimestamp(TIMESTAMP)
                         val commentTxt = data[COMMENTS_TXT] as String
+                        val documentId=doco.id
+                        val userId=data[USER_ID] as String
 
-                        val newComment = Comment(name, timestame, commentTxt)
+                        val newComment = Comment(name, timestame, commentTxt,documentId,userId)
                         comments.add(newComment)
                     }
                     commentAdapter.notifyDataSetChanged()
@@ -77,6 +79,9 @@ class CommentsActivity : AppCompatActivity() {
             data.put(COMMENTS_TXT, commentText)
             data.put(TIMESTAMP, FieldValue.serverTimestamp())
             data.put(USERNAME, FirebaseAuth.getInstance().currentUser?.displayName.toString())
+            data.put(USER_ID, FirebaseAuth.getInstance().currentUser?.uid.toString())
+
+
 
             transaction.set(newCommentRef, data)
 
@@ -90,10 +95,10 @@ class CommentsActivity : AppCompatActivity() {
             }
     }
 
-    private fun hideKeyboard(){
-        val inputeManager=getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        if (inputeManager.isAcceptingText){
-            inputeManager.hideSoftInputFromWindow(currentFocus?.windowToken,0)
+    private fun hideKeyboard() {
+        val inputeManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        if (inputeManager.isAcceptingText) {
+            inputeManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
     }
 }

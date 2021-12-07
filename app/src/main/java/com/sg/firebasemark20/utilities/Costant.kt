@@ -33,5 +33,6 @@ const val USERNAME="username"
 
 const val DATE_CREATED="dateCreated"
 const val COMMENTS_TXT="commentText"
+const val USER_ID="userid"
 
 const val DOCUMENT_KEY="docId"

@@ -14,6 +14,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/listViewToughtTxt"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="JhonnyB" />
@@ -22,11 +23,11 @@
         android:id="@+id/listViewTimestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
         android:textColor="@color/colorPrimary"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/listViewUsername"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/listViewUsername"
         app:layout_constraintTop_toTopOf="@+id/listViewUsername"
         tools:text="Oct 11, 9:06 PM" />
 
@@ -89,4 +90,14 @@
         app:layout_constraintStart_toEndOf="@+id/listViewCommentImage"
         app:layout_constraintTop_toTopOf="@+id/listViewCommentImage"
         tools:text="99" />
+
+    <ImageView
+        android:id="@+id/thoughtOptinImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/listViewTimestamp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/listViewTimestamp"
+        app:srcCompat="@drawable/ellipsis" />
 </androidx.constraintlayout.widget.ConstraintLayout>

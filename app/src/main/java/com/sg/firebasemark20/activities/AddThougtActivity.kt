@@ -54,20 +54,21 @@ class AddThougtActivity : AppCompatActivity() {
     fun addPostClick(view: View) {
         //add post to firebase
 
-        val data=HashMap<String,Any>()
-        data.put(CATEGORY,selectedCategory)
-        data.put(NUM_COMMENTS,0)
-        data.put(NUM_LIKES,0)
-        data.put(THOUGHT_TXT,addThoughtTxt.text.toString())
-        data.put(TIMESTAMP,FieldValue.serverTimestamp())
-        data.put(USERNAME,FirebaseAuth.getInstance().currentUser?.displayName.toString())
+        val data = HashMap<String, Any>()
+        data.put(CATEGORY, selectedCategory)
+        data.put(NUM_COMMENTS, 0)
+        data.put(NUM_LIKES, 0)
+        data.put(THOUGHT_TXT, addThoughtTxt.text.toString())
+        data.put(TIMESTAMP, FieldValue.serverTimestamp())
+        data.put(USERNAME, FirebaseAuth.getInstance().currentUser?.displayName.toString())
+        data.put(USER_ID, FirebaseAuth.getInstance().currentUser?.uid.toString())
 
         FirebaseFirestore.getInstance().collection(THOUGHT_REF).add(data)
             .addOnSuccessListener {
                 finish()
             }
             .addOnFailureListener {
-                Log.e(TAG,"could not add post exception because --> ${it.message}")
+                Log.e(TAG, "could not add post exception because --> ${it.message}")
             }
 
     }
