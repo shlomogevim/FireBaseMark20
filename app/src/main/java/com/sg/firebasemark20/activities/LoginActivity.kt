@@ -34,12 +34,9 @@ class LoginActivity : AppCompatActivity() {
             .addOnFailureListener {
                 Log.d(TAG,"sorry cannot login bebause --> ${it.localizedMessage}")
             }
-
-
     }
     fun loginCreateClicked(view: View) {
         val intent= Intent(this, CreateUserActivity::class.java)
         startActivity(intent)
-
     }
 }
