@@ -13,11 +13,12 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.sg.firebasemark20.*
 import com.sg.firebasemark20.adapters.CommentAdapter
+import com.sg.firebasemark20.interfacrs.CommentsOptionClickListener
 import com.sg.firebasemark20.model.Comment
 import kotlinx.android.synthetic.main.activity_comments.*
 import java.lang.reflect.Field
 
-class CommentsActivity : AppCompatActivity() {
+class CommentsActivity : AppCompatActivity(),CommentsOptionClickListener {
 
     lateinit var thoughtDocumentID: String
     var comments = arrayListOf<Comment>()
@@ -28,7 +29,7 @@ class CommentsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_comments)
 
         thoughtDocumentID = intent.getStringExtra(COMMENTS_KEY).toString()
-        commentAdapter = CommentAdapter(comments)
+        commentAdapter = CommentAdapter(comments,this)
         commentsListview.adapter = commentAdapter
         val layoutManager = LinearLayoutManager(this)
         commentsListview.layoutManager = layoutManager
@@ -59,6 +60,10 @@ class CommentsActivity : AppCompatActivity() {
 
 
             }
+    }
+
+    override fun optionMenuClicked(comment: Comment) {
+        Log.d(TAG," comment --> ${comment.commentTxt}")
     }
 
     fun addCommentClick(view: View) {
@@ -101,4 +106,6 @@ class CommentsActivity : AppCompatActivity() {
             inputeManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
     }
+
+
 }

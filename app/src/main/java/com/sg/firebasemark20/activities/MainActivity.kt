@@ -1,6 +1,7 @@
 package com.sg.firebasemark20.activities
 
 import android.content.Intent
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -15,10 +16,11 @@ import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 import com.sg.firebasemark20.*
 import com.sg.firebasemark20.adapters.ThoughtsAdapter
+import com.sg.firebasemark20.interfacrs.ThoughtOptionClickListener
 import com.sg.firebasemark20.model.Thought
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),ThoughtOptionClickListener {
 
     lateinit var selectCategory: String
     lateinit var thoughtsAdapter: ThoughtsAdapter
@@ -39,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        thoughtsAdapter = ThoughtsAdapter(thoughts){thought->
+        thoughtsAdapter = ThoughtsAdapter(thoughts,this){thought->
             val commentIntent=Intent(this,CommentsActivity::class.java)
             commentIntent.putExtra(COMMENTS_KEY,thought.documentId)
             startActivity(commentIntent)
@@ -65,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         val menuItem=menu.getItem(0)
         if (auth.currentUser==null){
@@ -76,6 +79,10 @@ class MainActivity : AppCompatActivity() {
             updateUI()
         }
         return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun thoughtOptionMenuClick(thought: Thought) {
+        Log.d(TAG,"thought ->  ${thought.thoughtTxt}")
     }
 
     fun updateUI(){
@@ -225,6 +232,8 @@ class MainActivity : AppCompatActivity() {
         thoughtListener.remove()
          setListener()
     }
+
+
 
 
 }
