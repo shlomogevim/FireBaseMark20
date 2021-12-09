@@ -35,4 +35,6 @@ const val DATE_CREATED="dateCreated"
 const val COMMENTS_TXT="commentText"
 const val USER_ID="userid"
 
-const val DOCUMENT_KEY="docId"
+const val THOUGHT_DOC_ID_EXTRA="thoughtdot"
+const val COMMENT_DOC_ID_EXTRA="commentdotidexstra"
+const val COMMENT_TEXT_EXSTRA="commenttextexstra"
