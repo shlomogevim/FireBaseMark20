@@ -236,6 +236,7 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
 
     fun parseData(snapshot: QuerySnapshot) {
         var thoughtTxt = ""
+        var userId=""
         var numLikes = 0L
         var numComments = 0L
         thoughts.clear()
@@ -254,7 +255,9 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
                 }
                 val timestamp = document.getTimestamp(TIMESTAMP)
                 val documentId = document.id
-                val userId = data[USER_ID] as String
+                if (data[USER_ID] != null) {
+                     userId = data[USER_ID] as String
+                }
                 val newThought = Thought(
                     name,
                     timestamp,
