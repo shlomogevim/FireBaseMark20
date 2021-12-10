@@ -37,4 +37,5 @@ const val USER_ID="userid"
 
 const val THOUGHT_DOC_ID_EXTRA="thoughtdot"
 const val COMMENT_DOC_ID_EXTRA="commentdotidexstra"
+const val THOUGHT_TEXT_EXSTRA="thougttextexstra"
 const val COMMENT_TEXT_EXSTRA="commenttextexstra"

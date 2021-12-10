@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.UpdateCommentActivity">
+    tools:context=".activities.UpdateThoughtActivity">
 
     <EditText
         android:id="@+id/updaeCommentTxt"
@@ -26,8 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:backgroundTint="@color/colorAccent"
-        android:onClick="updateCommentClick"
-        android:text="Update"
+        android:onClick="updateToughtClick"
+        android:text="Update Thougt"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"

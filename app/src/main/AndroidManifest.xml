@@ -9,6 +9,9 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.FireBaseMark20">
         <activity
+            android:name=".activities.UpdateThoughtActivity"
+            android:exported="false" />
+        <activity
             android:name=".activities.UpdateCommentActivity"
             android:exported="false" />
         <activity

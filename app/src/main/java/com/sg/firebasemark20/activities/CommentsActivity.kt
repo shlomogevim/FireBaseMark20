@@ -67,27 +67,17 @@ class CommentsActivity : AppCompatActivity(), CommentsOptionClickListener {
         val dialogView = layoutInflater.inflate(R.layout.option_menu, null)
         val deleteBtn = dialogView.findViewById<Button>(R.id.optionDelelBtn)
         val editBtn = dialogView.findViewById<Button>(R.id.optionEditBtn)
-
         builder.setView(dialogView)
             .setNegativeButton("Cancel") { _, _ -> }
         val ad = builder.show()
+
         deleteBtn.setOnClickListener {
-            val thoughtRef =
-                FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thoughtDocumentID)
+            val thoughtRef = FirebaseFirestore.getInstance()
+                .collection(THOUGHT_REF).document(thoughtDocumentID)
 
-            val commentRef =
-                FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thoughtDocumentID)
-                    .collection(COMMENTS_REF).document(comment.documentID)
-            /* commentRef.delete()
-                .addOnSuccessListener {
-                    ad.dismiss()
-                }
-                .addOnFailureListener {
-                    Log.d(TAG, "cannot create transaction because : ${it.localizedMessage}")
-
-                } //  all this transition because because you want to make minus 1 in the counter comments
-        }*/
-
+            val commentRef = FirebaseFirestore.getInstance()
+                .collection(THOUGHT_REF).document(thoughtDocumentID)
+                .collection(COMMENTS_REF).document(comment.documentID)
             FirebaseFirestore.getInstance().runTransaction { transaction ->
                 val thought = transaction.get(thoughtRef)
                 val numComments = thought.getLong(NUM_COMMENTS)?.minus(1)
@@ -99,14 +89,15 @@ class CommentsActivity : AppCompatActivity(), CommentsOptionClickListener {
                 Log.d(TAG, "cannot create transaction because : ${it.localizedMessage}")
             }
         }
-      editBtn.setOnClickListener {
-          val intent= Intent(this,UpdateCommentActivity::class.java)
-          intent.putExtra(THOUGHT_DOC_ID_EXTRA,thoughtDocumentID)
-          intent.putExtra(COMMENT_DOC_ID_EXTRA,comment.documentID)
-          intent.putExtra(COMMENT_TEXT_EXSTRA,comment.commentTxt)
-          ad.dismiss()
-          startActivity(intent)
-      }
+
+        editBtn.setOnClickListener {
+            val intent = Intent(this, UpdateCommentActivity::class.java)
+            intent.putExtra(THOUGHT_DOC_ID_EXTRA, thoughtDocumentID)
+            intent.putExtra(COMMENT_DOC_ID_EXTRA, comment.documentID)
+            intent.putExtra(COMMENT_TEXT_EXSTRA, comment.commentTxt)
+            ad.dismiss()
+            startActivity(intent)
+        }
     }
 
     fun addCommentClick(view: View) {

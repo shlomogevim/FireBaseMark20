@@ -10,47 +10,40 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.sg.firebasemark20.*
 import kotlinx.android.synthetic.main.activity_update_comment.*
 
-class UpdateCommentActivity : AppCompatActivity() {
+class UpdateThoughtActivity : AppCompatActivity() {
 
     lateinit var thoughtDocId: String
-    lateinit var commentDocId: String
-    lateinit var commentTxt: String
+    lateinit var thoughtTxt:String
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_update_comment)
+        setContentView(R.layout.activity_update_thought)
 
         thoughtDocId = intent.getStringExtra(THOUGHT_DOC_ID_EXTRA).toString()
-        commentDocId = intent.getStringExtra(COMMENT_DOC_ID_EXTRA).toString()
-        commentTxt = intent.getStringExtra(COMMENT_TEXT_EXSTRA).toString()
+        thoughtTxt = intent.getStringExtra(THOUGHT_TEXT_EXSTRA).toString()
 
-        updaeCommentTxt.setText(commentTxt)
-
-
+        updaeCommentTxt.setText(thoughtTxt)
     }
 
+    fun updateToughtClick(view: View) {
 
-
-    fun updateCommentClick(view:View) {
         FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thoughtDocId)
-            .collection(COMMENTS_REF).document(commentDocId)
-            .update(COMMENTS_TXT,updaeCommentTxt.text.toString())
+            .update(THOUGHT_TXT, updaeCommentTxt.text.toString())
             .addOnSuccessListener {
                 hideKeyboard()
                 finish()
             }
             .addOnFailureListener {
-                Log.d(TAG,"cannot edit comment -> ${it.localizedMessage}")
+                Log.d(TAG, "cannot edit comment -> ${it.localizedMessage}")
             }
     }
+
     private fun hideKeyboard() {
         val inputeManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         if (inputeManager.isAcceptingText) {
             inputeManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
         }
     }
-
-
-
 }

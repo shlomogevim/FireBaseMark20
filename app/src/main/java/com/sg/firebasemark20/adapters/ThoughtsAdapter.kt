@@ -70,6 +70,7 @@ class ThoughtsAdapter(
             }
             if (FirebaseAuth.getInstance().currentUser?.uid == thought.userId) {
                 optionImage.visibility = View.VISIBLE
+
                 optionImage?.setOnClickListener {
                     thoughtOptionListener.thoughtOptionMenuClick(thought)
 
