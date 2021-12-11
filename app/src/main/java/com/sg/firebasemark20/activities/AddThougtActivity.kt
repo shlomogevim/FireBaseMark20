@@ -14,9 +14,12 @@ class AddThougtActivity : AppCompatActivity() {
 
     var selectedCategory = FUNNY
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_thougt)
+
+
     }
 
     fun addFunnyClick(view: View) {

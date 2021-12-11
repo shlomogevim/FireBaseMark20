@@ -41,8 +41,10 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
 
         fab.setOnClickListener { view ->
             val intent = Intent(this, AddThougtActivity::class.java)
+            intent.putExtra(INDICATE_USER_USE,0)
             startActivity(intent)
         }
+        setUserBtns()
 
         thoughtsAdapter = ThoughtsAdapter(thoughts, this) { thought ->
             val commentIntent = Intent(this, CommentsActivity::class.java)
@@ -59,6 +61,7 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
 
     }
 
+
     override fun onResume() {
         super.onResume()
         updateUI()
@@ -66,6 +69,7 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
 
     fun updateUI() {
         if (auth.currentUser == null) {
+            mainUserName.text="It's LogOut state"
             mainCrazyBtn.isEnabled = false
             mainFunnyBtn.isEnabled = false
             mainPopularBtn.isEnabled = false
@@ -75,6 +79,8 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
             thoughtsAdapter.notifyDataSetChanged()
 
         } else {
+            val name = auth.currentUser!!.displayName
+            mainUserName.text="It's LogIn state, current user : $name"
             mainCrazyBtn.isEnabled = true
             mainFunnyBtn.isEnabled = true
             mainPopularBtn.isEnabled = true
@@ -133,12 +139,17 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
         } else {
             // log in state
             menuItem.title = "Logout"
-            updateUI()
+           updateUI()
         }
         return super.onPrepareOptionsMenu(menu)
     }
 
     override fun thoughtOptionMenuClick(thought: Thought) {
+
+        val thoughtRef =
+            FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thought.documentId)
+
+        //mainUserName.text=thought.userName
 
         val builder = AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.option_menu, null)
@@ -147,10 +158,6 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
         builder.setView(dialogView)
             .setNegativeButton("Cancel") { _, _ -> }
         val ad = builder.show()
-
-        val thoughtRef =
-            FirebaseFirestore.getInstance().collection(THOUGHT_REF).document(thought.documentId)
-
 
         deleteBtn.setOnClickListener {
             val collectionRef =
@@ -172,14 +179,13 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
 
 
         editBtn.setOnClickListener {
-            editBtn.setOnClickListener {
                 val intent = Intent(this, UpdateThoughtActivity::class.java)
                 intent.putExtra(THOUGHT_DOC_ID_EXTRA, thought.documentId)
                 intent.putExtra(THOUGHT_TEXT_EXSTRA, thought.thoughtTxt)
                 ad.dismiss()
                 startActivity(intent)
             }
-        }
+
     }
 
     fun deleteCollection(                    // to delet all comments of this thought
@@ -270,6 +276,23 @@ class MainActivity : AppCompatActivity(), ThoughtOptionClickListener {
                 thoughts.add(newThought)
             }
             thoughtsAdapter.notifyDataSetChanged()
+        }
+    }
+    private fun setUserBtns() {
+        user1Btn.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra(INDICATE_USER_USE,1)
+            startActivity(intent)
+        }
+        user2Btn.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra(INDICATE_USER_USE,2)
+            startActivity(intent)
+        }
+        user3Btn.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra(INDICATE_USER_USE,3)
+            startActivity(intent)
         }
     }
 
